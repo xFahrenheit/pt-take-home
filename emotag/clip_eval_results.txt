@@ -1,0 +1,93 @@
+pure  it f1    neutral   31.8s 11seg -> neutral  cons=0.93 conf=0.99 ok             | ne ne ne ne sa ne ne ne ne ne ne 
+pure  it f1    happy     31.6s 12seg -> happy    cons=0.65 conf=0.98 ok             | ha ha ha an ha ne ha ha ha ha an ne 
+pure  it f1    sad       32.6s 11seg -> sad      cons=0.92 conf=0.97 ok             | di sa sa sa sa sa sa sa sa sa sa 
+pure  it f1    angry     30.8s 13seg -> angry    cons=1.00 conf=0.97 ok             | an an an an an an an an an an an an an 
+pure  it f1    fear      32.2s 12seg -> fear     cons=0.55 conf=0.92 mixed          | su sa fe sa fe fe fe sa sa fe ne fe 
+pure  it f1    surprise  31.8s 12seg -> surprise cons=0.84 conf=0.94 ok             | su su su su su su fe su fe su su 
+pure  it f1    disgust   32.6s 10seg -> disgust  cons=0.60 conf=0.99 mixed          | an an an fe un di di di di di 
+mixed it f1    ang+neu   35.9s 14seg -> neutral  cons=0.53 conf=0.97 mixed          | an an an an an an an ne ne ne ne ne ne ne 
+mixed it f1    sad+neu   39.5s 14seg -> sad      cons=0.47 conf=0.95 mixed          | di sa sa sa sa sa sa ne ne ne ne sa ne ne 
+mixed it f1    hap+neu   38.2s 14seg -> neutral  cons=0.51 conf=0.94 mixed          | ha ha ha an ha ne ha ne ne ne an sa ne ne 
+pure  it f2    neutral   31.9s 13seg -> neutral  cons=0.83 conf=1.00 ok             | ne ne ha ha ha ne ne ne ne ne ne ne ne 
+pure  it f2    happy     32.0s 14seg -> happy    cons=0.94 conf=0.95 ok             | ha ha ha ha ha ha an ha ha ha ha ha ha 
+pure  it f2    sad       32.7s 16seg -> sad      cons=0.43 conf=0.95 mixed          | ne sa ha ne sa ne fe sa ne sa sa fe 
+pure  it f2    angry     30.5s 13seg -> angry    cons=1.00 conf=0.99 ok             | an an an an an an an an an an an an an 
+pure  it f2    fear      32.5s 15seg -> fear     cons=0.59 conf=0.92 mixed          | fe fe fe ha ha ha fe fe fe ha an an fe fe 
+pure  it f2    surprise  32.3s 13seg -> angry    cons=0.40 conf=0.96 mixed          | an an su an an su an an ha su ha ha ha 
+pure  it f2    disgust   32.1s 13seg -> fear     cons=0.32 conf=0.82 mixed          | ne an ha an ha su fe ne fe an ne fe fe 
+mixed it f2    ang+neu   34.0s 15seg -> angry    cons=0.54 conf=0.98 mixed          | an an an an an an an an ne ne ne ha ha ne ne 
+mixed it f2    sad+neu   34.8s 17seg -> neutral  cons=0.58 conf=0.98 mixed          | ne sa ha ne sa ne fe sa ne ne ne ha ha ne ne 
+mixed it f2    hap+neu   31.0s 14seg -> happy    cons=0.48 conf=0.92 mixed          | ha ha ha ha ha ha an ne ne ne ne ha ne ne 
+pure  it f3    neutral   31.3s 14seg -> neutral  cons=1.00 conf=1.00 ok             | ne ne ne ne ne ne ne ne ne ne ne ne ne ne 
+pure  it f3    happy     32.1s 13seg -> happy    cons=0.72 conf=0.95 ok             | ha di ne su ha ha ha ne ha ha ha ha ha 
+pure  it f3    sad       31.7s 12seg -> sad      cons=1.00 conf=0.98 ok             | sa sa sa sa sa sa sa sa sa sa sa sa 
+pure  it f3    angry     33.1s 13seg -> angry    cons=1.00 conf=1.00 ok             | an an an an an an an an an an an an an 
+pure  it f3    fear      30.5s 13seg -> fear     cons=0.71 conf=0.97 ok             | fe fe fe fe fe fe fe di sa fe fe sa 
+pure  it f3    surprise  32.2s 11seg -> surprise cons=0.76 conf=0.95 ok             | su su su su su su su su ha ha ha 
+pure  it f3    disgust   31.4s 13seg -> disgust  cons=0.76 conf=0.96 ok             | di di di su di di di ne di di un sa 
+mixed it f3    ang+neu   34.6s 15seg -> neutral  cons=0.52 conf=1.00 mixed          | an an an an an an an ne ne ne ne ne ne ne ne 
+mixed it f3    sad+neu   35.8s 15seg -> neutral  cons=0.56 conf=1.00 mixed          | sa sa sa sa sa sa sa ne ne ne ne ne ne ne ne 
+mixed it f3    hap+neu   35.2s 15seg -> neutral  cons=0.61 conf=0.94 ok             | ha di ne su ha ha ha ne ne ne ne ne ne ne ne 
+pure  it m1    neutral   30.2s 14seg -> neutral  cons=1.00 conf=1.00 ok             | ne ne ne ne ne ne ne ne ne ne ne ne ne 
+pure  it m1    happy     30.1s 14seg -> happy    cons=0.81 conf=0.98 ok             | ha ha ha an ha ha an an ha ha ha ha ha 
+pure  it m1    sad       31.9s 14seg -> sad      cons=0.86 conf=0.85 ok             | sa sa sa sa sa sa ne sa sa sa ne sa 
+pure  it m1    angry     31.3s 10seg -> angry    cons=1.00 conf=1.00 ok             | an an an an an an an an an an 
+pure  it m1    fear      31.2s 14seg -> fear     cons=0.73 conf=1.00 ok             | sa sa fe fe fe fe ha fe fe ha fe fe fe 
+pure  it m1    surprise  32.4s 14seg -> happy    cons=0.44 conf=0.92 mixed          | fe ne su su ha su an ha ha ha ha ha su 
+pure  it m1    disgust   30.1s 12seg -> disgust  cons=0.75 conf=0.97 ok             | di di di fe di di di sa sa di sa di 
+mixed it m1    ang+neu   34.7s 14seg -> neutral  cons=0.54 conf=1.00 mixed          | an an an an an an ne ne ne ne ne ne ne ne 
+mixed it m1    sad+neu   35.9s 16seg -> neutral  cons=0.65 conf=0.98 ok             | sa sa sa sa sa sa ne ne ne ne ne ne ne ne ne 
+mixed it m1    hap+neu   33.5s 15seg -> neutral  cons=0.56 conf=1.00 mixed          | ha ha ha an ha ha an ne ne ne ne ne ne ne ne 
+pure  it m2    neutral   31.3s  9seg -> neutral  cons=0.84 conf=0.97 ok             | ne ne ne ne ne ne ne ne sa 
+pure  it m2    happy     30.4s 11seg -> happy    cons=0.94 conf=1.00 ok             | ha ha ha ha ha ha su ha ha ha ha 
+pure  it m2    sad       30.8s 13seg -> sad      cons=0.91 conf=1.00 ok             | sa sa sa sa sa sa sa sa sa sa sa ne 
+pure  it m2    angry     31.1s  9seg -> angry    cons=1.00 conf=0.98 ok             | an an an an an an an an an 
+pure  it m2    fear      31.3s 12seg -> fear     cons=1.00 conf=1.00 ok             | fe fe fe fe fe fe fe fe fe fe fe 
+pure  it m2    surprise  32.8s 13seg -> surprise cons=0.83 conf=0.99 ok             | su su su sa su su su su su sa su sa su 
+pure  it m2    disgust   30.0s  9seg -> disgust  cons=0.83 conf=1.00 ok             | di di di fe fe di di di di 
+mixed it m2    ang+neu   32.4s 10seg -> angry    cons=0.52 conf=1.00 mixed          | an an an an an ne ne ne ne ne 
+mixed it m2    sad+neu   32.4s 12seg -> sad      cons=0.58 conf=1.00 mixed          | sa sa sa sa sa sa sa ne ne ne ne ne 
+mixed it m2    hap+neu   33.8s 12seg -> happy    cons=0.52 conf=0.99 mixed          | ha ha ha ha ha ha su ne ne ne ne ne 
+pure  it m3    neutral   30.7s 13seg -> neutral  cons=1.00 conf=0.96 ok             | ne ne ne ne ne ne ne ne ne ne ne ne 
+pure  it m3    happy     30.5s 12seg -> happy    cons=0.57 conf=0.92 mixed          | ha fe ha ha fe an fe ha ha ha ha ne 
+pure  it m3    sad       30.9s 12seg -> sad      cons=0.75 conf=1.00 ok             | sa sa sa sa sa ne sa sa sa di sa 
+pure  it m3    angry     30.6s 11seg -> angry    cons=0.73 conf=0.94 ok             | an fe an an an an sa an ne an an 
+pure  it m3    fear      31.3s 12seg -> fear     cons=0.88 conf=0.98 ok             | fe fe fe fe fe sa fe fe fe fe fe fe 
+pure  it m3    surprise  30.7s 12seg -> fear     cons=0.40 conf=0.93 mixed          | su ne fe su fe sa fe su ne fe fe 
+pure  it m3    disgust   31.8s 11seg -> disgust  cons=0.42 conf=0.95 mixed          | di ne ne fe sa ne di di ne sa di 
+mixed it m3    ang+neu   32.2s 13seg -> neutral  cons=0.50 conf=0.85 mixed          | an fe an an an an ne ne ne ne ne ne ne 
+mixed it m3    sad+neu   32.9s 14seg -> neutral  cons=0.54 conf=0.99 mixed          | sa sa sa sa sa ne sa ne ne sa ne ne ne ne 
+mixed it m3    hap+neu   32.2s 14seg -> neutral  cons=0.49 conf=0.90 mixed          | ha fe ha ha fe an fe ne ne ne ne ne ne ne 
+pure  en 1016  angry     30.8s 11seg -> happy    cons=0.36 conf=0.84 mixed          | ha ha an an an ha di di ha un an 
+pure  en 1016  sad       30.8s 10seg -> neutral  cons=0.40 conf=0.99 mixed          | ne ne an ne fe sa sa ha ne 
+pure  en 1016  happy     32.5s 12seg -> happy    cons=0.81 conf=0.99 ok             | ha ha ha ha un ha ha ne ha ha ha ha 
+pure  en 1016  neutral   30.8s 12seg -> neutral  cons=0.90 conf=1.00 ok             | ne ne ne ne ne ne ne ne ha ne ne 
+mixed en 1016  ang+neu   31.5s 12seg -> neutral  cons=0.45 conf=0.99 mixed          | ha ha an an an ha ne ne ne ne ne ne 
+mixed en 1016  sad+neu   30.6s 11seg -> neutral  cons=0.81 conf=0.99 ok             | ne ne an ne fe ne ne ne ne ne ne 
+mixed en 1016  hap+neu   31.1s 12seg -> happy    cons=0.47 conf=0.99 mixed          | ha ha ha ha un ha ne ne ne ne ne 
+pure  en 1017  angry     30.0s 14seg -> angry    cons=0.36 conf=0.96 mixed          | an un an an ne un ha ne di ha 
+pure  en 1017  sad       28.3s 12seg -> neutral  cons=0.67 conf=0.86 ok             | ne sa ne ne ne sa di sa ne ne ne ne 
+pure  en 1017  happy     26.6s 12seg -> neutral  cons=0.45 conf=0.99 mixed          | ne ne ne un ha ha ha ne ne ha an 
+pure  en 1017  neutral   28.6s 12seg -> neutral  cons=0.89 conf=1.00 ok             | ne ne ne ne ne ne ne ne sa ne ne ne 
+mixed en 1017  ang+neu   29.7s 12seg -> neutral  cons=0.55 conf=0.95 mixed          | an un an an ne un ne ne ne ne ne ne 
+mixed en 1017  sad+neu   27.8s 12seg -> neutral  cons=0.84 conf=1.00 ok             | ne sa ne ne ne sa ne ne ne ne ne ne 
+mixed en 1017  hap+neu   27.5s 12seg -> neutral  cons=0.82 conf=1.00 ok             | ne ne ne un ha ne ne ne ne ne ne 
+pure  en 1018  angry     31.5s 12seg -> angry    cons=0.78 conf=0.92 ok             | an an an an an an un ha an an ha an 
+pure  en 1018  sad       31.3s 11seg -> sad      cons=0.75 conf=0.96 ok             | ne ne sa sa sa ne sa sa sa sa 
+pure  en 1018  happy     27.0s 12seg -> happy    cons=0.92 conf=0.97 ok             | ha ha ha ha ha ha ha ha ha ne ha ha 
+pure  en 1018  neutral   29.5s 12seg -> neutral  cons=1.00 conf=1.00 ok             | ne ne ne ne ne ne ne ne ne ne ne ne 
+mixed en 1018  ang+neu   29.4s 12seg -> angry    cons=0.57 conf=0.88 mixed          | an an an an an an ne ne ne ne ne ne 
+mixed en 1018  sad+neu   30.3s 12seg -> neutral  cons=0.69 conf=0.99 ok             | ne ne sa sa sa ne ne ne ne ne ne 
+mixed en 1018  hap+neu   27.7s 12seg -> happy    cons=0.51 conf=0.95 mixed          | ha ha ha ha ha ha ne ne ne ne ne ne 
+pure  en 1019  angry     29.2s 11seg -> angry    cons=0.88 conf=0.99 ok             | an an an an an an an an an an un 
+pure  en 1019  sad       29.3s 11seg -> sad      cons=0.82 conf=0.86 ok             | ne di sa sa sa sa sa sa sa sa 
+pure  en 1019  happy     29.7s 11seg -> happy    cons=0.81 conf=0.97 ok             | ha ha ha ha ha ha ha ha ne ha ne 
+pure  en 1019  neutral   25.9s 11seg -> neutral  cons=1.00 conf=1.00 ok             | ne ne ne ne ne ne ne ne ne ne ne 
+mixed en 1019  ang+neu   27.5s 12seg -> angry    cons=0.55 conf=0.99 mixed          | an an an an an an ne ne ne ne ne ne 
+mixed en 1019  sad+neu   28.1s 12seg -> neutral  cons=0.60 conf=1.00 ok             | ne di sa sa sa ne ne ne ne ne ne 
+mixed en 1019  hap+neu   29.4s 12seg -> happy    cons=0.53 conf=0.95 mixed          | ha ha ha ha ha ha ne ne ne ne ne ne 
+
+it: pure n=42 label correct=38 ok and correct=32 status={'ok': 32, 'mixed': 10}
+it: mixed n=18 flagged mixed=16 status={'mixed': 16, 'ok': 2}
+en: pure n=16 label correct=12 ok and correct=11 status={'mixed': 4, 'ok': 12}
+en: mixed n=12 flagged mixed=7 status={'mixed': 7, 'ok': 5}

@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+*.zip
+CLAUDE.md
+ASSIGNMENT.md
+data/
+demo_out/
+ARCHITECTURE.md

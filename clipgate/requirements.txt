@@ -1,0 +1,5 @@
+numpy
+scipy
+soundfile
+librosa  # demo.py only, for public example audio
+pytest

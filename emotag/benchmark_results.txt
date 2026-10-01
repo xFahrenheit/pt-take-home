@@ -1,0 +1,38 @@
+
+en  n=180  accuracy=0.900  UAR=0.900
+true/pred   neutral    happy      sad    angry     fear  surpris  disgust  unknown
+neutral          30        0        0        0        0        0        0        0
+happy             0       30        0        0        0        0        0        0
+sad               0        1       25        0        2        0        2        0
+angry             0        1        0       29        0        0        0        0
+fear              0        1        4        0       25        0        0        0
+disgust           2        0        2        1        2        0       23        0
+
+es  n=862  accuracy=0.503  UAR=0.504
+true/pred   neutral    happy      sad    angry     fear  surpris  disgust  unknown
+neutral          85        8       16       12        5        4       12        1
+happy             2       82        1       19        5       24        8        3
+sad              28        8       87        1       15        3        0        2
+angry            13       18        5       62        8       20       14        3
+fear             29       18       34        9       33        7        5        9
+disgust          12       10       10        2        7       16       85        2
+
+fr  n=936  accuracy=0.858  UAR=0.855
+true/pred   neutral    happy      sad    angry     fear  surpris  disgust  unknown
+neutral          59        4        8        1        0        0        0        0
+happy             2      108        5        5        3        8       12        1
+sad               2        3      125        0        5        0        9        0
+angry             0        1        0      124        0        2       16        1
+fear              0        4        4        5      116        9        6        0
+surprise          0        2        0        1        2      139        0        0
+disgust           1        2        1        2        0        6      132        0
+
+it  n=588  accuracy=0.874  UAR=0.874
+true/pred   neutral    happy      sad    angry     fear  surpris  disgust  unknown
+neutral          81        2        0        0        0        1        0        0
+happy             0       72        0        2        0       10        0        0
+sad               4        2       66        0       11        0        1        0
+angry             0        1        0       81        1        1        0        0
+fear              0        1        0        1       79        3        0        0
+surprise          0        6        0        5        2       71        0        0
+disgust           1        3        0        1        9        6       64        0

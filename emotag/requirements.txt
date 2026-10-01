@@ -1,0 +1,10 @@
+numpy
+scipy
+pytest
+soundfile  # benchmark.py only
+# backends.py only. FunASR doesn't declare torch, and without the transformers
+# floor the resolver picks a version whose tokenizers won't build on Python 3.12.
+torch
+funasr
+transformers>=4.40
+silero-vad  # clip_eval.py only
