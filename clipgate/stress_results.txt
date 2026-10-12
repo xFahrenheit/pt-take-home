@@ -1,0 +1,10 @@
+230 clips of 25 to 33 s, one speaker and one emotion each.
+
+condition              should be   narrowband: before   now   gate verdicts now
+noise_snr20            wide                 66/230        3   PASS 126  FLAG  86  REJECT  18
+original               wide                 75/230        6   PASS  62  FLAG 119  REJECT  49
+quiet_-30dB            wide                 59/230        4   PASS   0  FLAG 149  REJECT  81
+phone_digital          narrow              230/230      230   PASS   0  FLAG   0  REJECT 230
+phone_quiet            narrow               94/230      157   PASS   0  FLAG  28  REJECT 202
+phone_tape_hiss_-25dB  narrow              209/230      230   PASS   0  FLAG   0  REJECT 230
+phone_tape_hiss_-40dB  narrow              230/230      230   PASS   0  FLAG   0  REJECT 230

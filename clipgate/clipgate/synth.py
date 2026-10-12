@@ -10,17 +10,19 @@ from scipy.signal import butter, resample_poly, sosfilt
 RNG = np.random.default_rng(0)
 
 
-def speechlike(sr=44100, dur=30.0, f0=120.0, noise_dbfs=-75.0):
+def speechlike(sr=44100, dur=30.0, f0=120.0, noise_dbfs=-75.0, tilt=0.8, breath=0.3):
+    """tilt: harmonic k has amplitude 1/k**tilt. Soft, low-effort speech (sad, calm)
+    has a steeper tilt, so almost all its energy sits below ~1 kHz."""
     t = np.arange(int(sr * dur)) / sr
     f0_t = f0 * (1 + 0.05 * np.sin(2 * np.pi * 0.7 * t))
     phase = 2 * np.pi * np.cumsum(f0_t) / sr
     x = np.zeros_like(t)
     k = 1
     while k * f0 * 1.05 < sr / 2 * 0.95:
-        x += np.sin(k * phase) / k ** 0.8          # gently falling spectrum
+        x += np.sin(k * phase) / k ** tilt
         k += 1
-    breath = sosfilt(butter(2, 2000, "high", fs=sr, output="sos"), RNG.standard_normal(len(t)))
-    x += 0.3 * breath                                # fricative-ish HF content
+    hf = sosfilt(butter(2, 2000, "high", fs=sr, output="sos"), RNG.standard_normal(len(t)))
+    x += breath * hf                                 # fricative-ish HF content
     env = 0.3 + 0.7 * (0.5 * (1 + np.sin(2 * np.pi * 4 * t)))  # ~4 syllables/sec
     gate = (np.sin(2 * np.pi * 0.25 * t) > -0.8)      # short pause every 4s
     x *= env * gate

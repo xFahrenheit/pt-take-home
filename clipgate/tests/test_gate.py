@@ -46,6 +46,13 @@ def test_tape_phone_with_hiss_rejected(tmp_path, clean):
     assert "narrowband" in codes(r)
 
 
+def test_heavy_tape_hiss_phone_rejected(tmp_path, clean):
+    # hiss ~13 dB under the speech shrinks the cliff below 15 dB; the flat hiss above it confirms the edge
+    m, v, r = run(tmp_path, "heavy_tape", synth.telephone(clean, SR, hiss_dbfs=-40))
+    assert v == REJECT
+    assert "narrowband" in codes(r)
+
+
 def test_codec_lowpass_passes(tmp_path, clean):
     m, v, r = run(tmp_path, "mp3ish", synth.lowpassed(clean, SR, 16000))
     assert v == PASS, r
@@ -84,6 +91,21 @@ def test_silence_rejected(tmp_path, clean):
 def test_wrong_duration_rejected(tmp_path, clean):
     _, v, r = run(tmp_path, "short", clean[: 10 * SR])
     assert v == REJECT and "duration" in codes(r)
+
+
+def test_soft_voice_not_read_as_narrowband(tmp_path):
+    # soft speech drops steeply above ~1 kHz; searching from 1 kHz called this telephone audio
+    soft, _ = synth.speechlike(sr=SR, tilt=2.5, breath=0.0)
+    m, v, r = run(tmp_path, "soft", soft)
+    assert "narrowband" not in codes(r)
+    assert m.effective_bw_hz > 7000
+
+
+def test_quiet_clean_recording_flagged_not_rejected(tmp_path, clean):
+    # 30 dB down is fixable with gain; it must not read as silent or be rejected
+    m, v, r = run(tmp_path, "quiet", clean * 10 ** (-30 / 20))
+    assert v == FLAG and codes(r) == {"quiet"}
+    assert m.silence_fraction < 0.3
 
 
 def test_stereo_is_mixed_down(tmp_path, clean):

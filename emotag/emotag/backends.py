@@ -1,7 +1,7 @@
 """emotion2vec+ large through FunASR, mapped onto our label set.
 
 Why this model: it's trained on speech emotion data across many languages,
-outputs a superset of our labels, and runs on CPU (~15x realtime on a laptop).
+outputs a superset of our labels, and runs on CPU (~24x realtime on a laptop).
 """
 import numpy as np
 from scipy.signal import resample_poly

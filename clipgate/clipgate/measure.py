@@ -8,7 +8,7 @@ from dataclasses import dataclass, asdict
 import numpy as np
 import soundfile as sf
 from scipy.ndimage import uniform_filter1d
-from scipy.signal import welch
+from scipy.signal import spectrogram, welch
 
 FRAME_SEC = 0.025
 HOP_SEC = 0.010
@@ -25,7 +25,7 @@ class ClipMetrics:
     bw_ratio: float             # effective_bw / nyquist. ~1 = uses the band it claims
     rms_dbfs: float
     clip_fraction: float        # fraction of samples at/near full scale
-    silence_fraction: float     # fraction of 25ms frames below the silence threshold
+    silence_fraction: float     # fraction of 25ms frames far below the clip's own speech level
     snr_db_est: float           # crude: loud-frame energy vs quiet-frame energy
     dc_offset: float
 
@@ -38,9 +38,34 @@ def load_mono(path):
     return x.mean(axis=1), sr, x.shape[1]
 
 
-def effective_bandwidth(x, sr, win_hz=1000.0, min_step_db=15.0, smooth_hz=200.0):
+def speech_rise_above(x, sr, edge_hz, margin_hz=500.0, span_hz=4000.0):
+    """dB by which energy above edge_hz rises in the loudest 20% of frames vs the
+    quietest 20%. Above a real channel edge there is only silence or hiss, and
+    neither changes when someone talks."""
+    nper = 2048 if sr > 24000 else 1024
+    f, _, S = spectrogram(x, fs=sr, nperseg=nper, noverlap=nper // 2)
+    band = (f >= edge_hz + margin_hz) & (f <= edge_hz + margin_hz + span_hz)
+    if not band.any():
+        return 0.0
+    frames, above = S.sum(axis=0), S[band].sum(axis=0)
+    loud = frames >= np.percentile(frames, 80)
+    quiet = frames <= np.percentile(frames, 20)
+    return float(10 * np.log10((above[loud].mean() + EPS) / (above[quiet].mean() + EPS)))
+
+
+def effective_bandwidth(x, sr, win_hz=1000.0, min_step_db=15.0, smooth_hz=200.0,
+                        min_edge_hz=2500.0, weak_step_db=8.0, max_rise_db=2.0):
     """Frequency of the sharpest drop ("cliff") in the long-term spectrum.
     Returns nyquist if no drop is steeper than min_step_db.
+
+    The search starts at min_edge_hz. The lowest channel limit we look for is
+    telephone (~3.4 kHz). Below that, a steep drop is the voice itself: soft
+    speech puts almost all its energy under 1 kHz, and searching from 1 kHz
+    read 45% of clean 30 s emotional clips as telephone audio.
+
+    A weaker step (weak_step_db to min_step_db) counts only if nothing above it
+    rises with speech. Heavy tape hiss shrinks the cliff at a phone edge below
+    15 dB, but the hiss above it stays flat while the voice comes and goes.
 
     Why a cliff and not a level threshold: telephone audio upsampled to 44.1kHz
     has nothing above ~3.4-4kHz. Upsampled digitally, the top of the band is
@@ -59,13 +84,16 @@ def effective_bandwidth(x, sr, win_hz=1000.0, min_step_db=15.0, smooth_hz=200.0)
 
     w = max(1, int(win_hz / df))
     best_step, best_i = 0.0, None
-    for i in range(w, len(f) - w):
+    for i in range(max(w, int(min_edge_hz / df)), len(f) - w):
         step = np.median(level[i - w:i]) - np.median(level[i:i + w])
         if step > best_step:
             best_step, best_i = step, i
-    if best_i is None or best_step < min_step_db:
+    if best_i is None or best_step < weak_step_db:
         return float(sr / 2)
-    return float(f[best_i])
+    edge = float(f[best_i])
+    if best_step < min_step_db and speech_rise_above(x, sr, edge) >= max_rise_db:
+        return float(sr / 2)  # speech continues above the step: natural rolloff, not a channel edge
+    return edge
 
 
 def frame_db(x, sr):
@@ -78,10 +106,13 @@ def frame_db(x, sr):
     return 10 * np.log10(np.mean(frames ** 2, axis=1) + EPS)
 
 
-def measure(path, silence_dbfs=-50.0, clip_level=0.999):
+def measure(path, silence_rel_db=40.0, silence_floor_dbfs=-80.0, clip_level=0.999):
     x, sr, ch = load_mono(path)
     db = frame_db(x, sr)
     bw = effective_bandwidth(x, sr)
+    # Silence is relative to this clip's loud frames, so a quiet but clean recording
+    # isn't read as silent. The absolute floor still catches near-digital silence.
+    silent_below = max(np.percentile(db, 95) - silence_rel_db, silence_floor_dbfs)
     return ClipMetrics(
         path=str(path),
         declared_sr=int(sr),
@@ -91,7 +122,7 @@ def measure(path, silence_dbfs=-50.0, clip_level=0.999):
         bw_ratio=round(bw / (sr / 2), 3),
         rms_dbfs=round(float(10 * np.log10(np.mean(x ** 2) + EPS)), 2),
         clip_fraction=round(float(np.mean(np.abs(x) >= clip_level)), 5),
-        silence_fraction=round(float(np.mean(db < silence_dbfs)), 3),
+        silence_fraction=round(float(np.mean(db < silent_below)), 3),
         # p95 frame ~ speech, p10 frame ~ background. Not a real SNR; a ranking signal.
         snr_db_est=round(float(np.percentile(db, 95) - np.percentile(db, 10)), 2),
         dc_offset=round(float(np.mean(x)), 5),

@@ -24,7 +24,8 @@ class Thresholds:
     flag_silence: float = 0.3
     reject_snr: float = 15.0
     flag_snr: float = 25.0
-    reject_rms_dbfs: float = -40.0
+    # Gain can be fixed after the fact; noise and missing bandwidth can't. So level alone only flags.
+    flag_rms_dbfs: float = -40.0
 
 
 REJECT, FLAG, PASS = "REJECT", "FLAG", "PASS"
@@ -62,8 +63,8 @@ def judge(m: ClipMetrics, t: Thresholds = Thresholds()):
     elif m.snr_db_est < t.flag_snr:
         add(FLAG, "noisy", f"est. SNR {m.snr_db_est:.1f} dB")
 
-    if m.rms_dbfs < t.reject_rms_dbfs:
-        add(REJECT, "quiet", f"RMS {m.rms_dbfs:.1f} dBFS")
+    if m.rms_dbfs < t.flag_rms_dbfs:
+        add(FLAG, "quiet", f"RMS {m.rms_dbfs:.1f} dBFS")
 
     sevs = {r[0] for r in reasons}
     verdict = REJECT if REJECT in sevs else FLAG if FLAG in sevs else PASS
